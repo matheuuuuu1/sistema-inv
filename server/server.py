@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""Servidor de la panaderia: sirve la app y guarda los datos compartidos.
-Datos en database.json en esta misma carpeta.
+"""Servidor de la panaderia: sirve la app (carpeta app/) y guarda los datos
+compartidos en database.json junto a este script.
 Uso:  python server.py  -> corre en http://0.0.0.0:8000
 """
 import json
 import os
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
-DB = os.path.join(ROOT, "database.json")
+SERVER_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.abspath(os.path.join(SERVER_DIR, "..", "app"))
+DB = os.path.join(SERVER_DIR, "database.json")
 
 DEFAULT_DB = {
     "orders": [],
