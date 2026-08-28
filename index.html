@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#8B4513">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Panaderia</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="login-screen" class="login-screen">
+    <div class="login-box">
+      <div class="login-title">Panaderia</div>
+      <div class="login-subtitle">¿Quien eres?</div>
+      <div class="login-mode" id="login-mode">Conectando...</div>
+      <button class="login-btn login-owner" onclick="loginAs('dueno')">👔 Dueño</button>
+      <button class="login-btn login-employee" onclick="loginAs('empleado')">🧑‍🍳 Empleado</button>
+    </div>
+  </div>
+
+  <div id="app" class="hidden">
+    <header id="header">
+      <button id="btn-menu" onclick="toggleMenu()">&#9776;</button>
+      <button id="btn-back" class="hidden" onclick="goBack()">&#9664;</button>
+      <h1 id="title">Panaderia</h1>
+      <div id="rate-display" onclick="showRateOptions()">USD: --</div>
+    </header>
+
+    <div id="sidebar" class="sidebar hidden">
+      <div class="sidebar-overlay" onclick="toggleMenu()"></div>
+      <div class="sidebar-panel">
+        <div class="sidebar-header">Menu</div>
+        <div class="sidebar-item" onclick="sidebarGo('categories')">🍞 Inicio</div>
+        <div class="sidebar-item" onclick="sidebarGo('records')">📋 Registros</div>
+        <div class="sidebar-item" onclick="sidebarGo('fiados')">📝 Fiados</div>
+        <div class="sidebar-item sidebar-owner" onclick="sidebarGo('edit')">✏️ Editar</div>
+        <div class="sidebar-item sidebar-owner" onclick="sidebarGo('datos')">💾 Datos</div>
+        <div class="sidebar-item sidebar-logout" onclick="logout()">🚪 Salir</div>
+      </div>
+    </div>
+
+    <main id="main"></main>
+
+    <div id="modal-overlay" class="modal-overlay hidden" onclick="closeModal()">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <span id="modal-title"></span>
+          <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div id="modal-body"></div>
+      </div>
+    </div>
+
+    <div id="fab" class="fab hidden" onclick="navigate('cart')">
+      🛒
+      <span id="fab-badge" class="fab-badge"></span>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="db.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+# datos de servidor en tiempo de ejecución
+database.json
+__pycache__/
+*.pyc
