@@ -1,0 +1,12 @@
+# sistema-yoender - Panaderia PWA
+services:
+  app:
+    build: .
+    container_name: yoender-app
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8000}:8000"
+    volumes:
+      - yoender_data:/app/server
+volumes:
+  yoender_data:
